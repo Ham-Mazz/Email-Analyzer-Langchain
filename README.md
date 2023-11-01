@@ -1,7 +1,7 @@
 # Email-Analyzer-Langchain
 This project aims to analyze and summarize a collection of emails using Langchain's API
 Overview
-This project aims to analyze and summarize a collection of emails using Langchain's API. It leverages the power of GPT-4 and Langchain's various modules to retrieve, process, and generate summaries and task lists from a directory of emails.
+This project aims to analyze and summarize a collection of emails using Langchain's API. It leverages the power of LLMs and Langchain's various modules to retrieve, process, and generate summaries and task lists from a directory of emails.
 
 Features
 Email Retrieval: Load emails from a directory
