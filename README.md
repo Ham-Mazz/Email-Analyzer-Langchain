@@ -10,6 +10,7 @@ Text Embedding: Embeds the chunks into vectors
 Text Retrieval: Retrieves relevant email chunks based on queries
 Text Summarization: Summarizes the emails and generates a task list
 
+pip install -r requirements.txt
 
 
 (readme IN-PROGRESS)
