@@ -1,0 +1,12 @@
+python==3.10
+langchain==0.0.327
+scipy==1.8.0
+numpy==1.24.0
+gpt4all==2.0.2
+asyncio==3.4.3
+logging==0.5.1.2
+python-dotenv==0.19.2
+chromadb==0.4.15
+unstructured==0.10.28
+transformers==4.22.0
+pandas==1.4.2
