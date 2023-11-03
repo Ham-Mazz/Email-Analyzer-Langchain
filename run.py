@@ -5,7 +5,6 @@ from langchain.embeddings import GPT4AllEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.document_loaders import DirectoryLoader
-from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain.schema.runnable import RunnablePassthrough
 from langchain.prompts import PromptTemplate
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
@@ -18,6 +17,8 @@ from langchain.retrievers.document_compressors import DocumentCompressorPipeline
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.retrievers.document_compressors import EmbeddingsFilter
 from langchain.retrievers import ContextualCompressionRetriever
+from langchain.chains import RetrievalQA
+
 
 import logging
 import asyncio
@@ -28,7 +29,7 @@ callbacks = [StreamingStdOutCallbackHandler()]
 
 embeddings = GPT4AllEmbeddings()
 loader = DirectoryLoader(
-        path = "/Users/Hmazz/OneDrive/Desktop/Email LLM/Emails",
+        path = "/Email LLM/Emails",
 		show_progress=True,
 		use_multithreading=True,
 		loader_cls=UnstructuredEmailLoader,
@@ -53,7 +54,7 @@ vectorstore =  Chroma (collection_name="split_parents", embedding_function=embed
 store = InMemoryStore()
 
 llm = GPT4All(
-    model="/Users/Hmazz/OneDrive\Desktop/Email LLM/Models/gpt4all-falcon-q4_0.gguf", callbacks=callbacks, verbose=True,
+    model="/Email LLM/Models/nous-hermes-llama2-13b.Q4_0.gguf", callbacks=callbacks, verbose=True,
 )
 question = "What are these emails discussing?"
 
@@ -84,8 +85,16 @@ Question: {question}
 Helpful Answer:"""
 rag_prompt_custom = PromptTemplate.from_template(template)
 
-rag_chain = {"context": retriever, "question": RunnablePassthrough()} | rag_prompt_custom | llm
+rag_chain = RetrievalQA(combine_documents_chain= qa, retriever= retriever)
 
 
-print(rag_chain.invoke(question))
+
+
+
+
+qa = {"context": retriever, "question": RunnablePassthrough()} | rag_prompt_custom | llm
+
+query = " can you summrize these emails for me?"
+
+rag_chain.run(query)
 

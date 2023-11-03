@@ -8,5 +8,5 @@ logging==0.5.1.2
 python-dotenv==0.19.2
 chromadb==0.4.15
 unstructured==0.10.28
-transformers==4.22.0
+transformers==4.35.0
 pandas==1.4.2
