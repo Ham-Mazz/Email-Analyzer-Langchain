@@ -84,6 +84,7 @@ If you don't know the answer, just say that you don't know, don't try to make up
 Question: {question}
 Helpful Answer:"""
 rag_prompt_custom = PromptTemplate.from_template(template)
+qa = {"context": retriever, "question": RunnablePassthrough()} | rag_prompt_custom | llm
 
 rag_chain = RetrievalQA(combine_documents_chain= qa, retriever= retriever)
 
@@ -92,7 +93,6 @@ rag_chain = RetrievalQA(combine_documents_chain= qa, retriever= retriever)
 
 
 
-qa = {"context": retriever, "question": RunnablePassthrough()} | rag_prompt_custom | llm
 
 query = " can you summrize these emails for me?"
 
